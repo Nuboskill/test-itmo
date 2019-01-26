@@ -6,6 +6,13 @@
     <div class="container">
         <div class="page-header">Редактирование автора</div>
 
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                {{ message }}"></a>
+            </div>
+        {% endfor %}
+
         {{ form(form) }}
     </div>
 {% endblock %}

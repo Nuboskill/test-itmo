@@ -40,7 +40,7 @@ class AuthorsController extends AbstractController
     {
         $author = new Author();
 
-        $form = $form = $this->createForm(AuthorType::class, $author);
+        $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,13 +62,15 @@ class AuthorsController extends AbstractController
      */
     public function update(Request $request, Author $author)
     {
-        $form = $form = $this->createForm(AuthorType::class, $author);
+        $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($author);
             $entityManager->flush();
+
+            $this->addFlash('notice','Автор успешно изменен.');
 
             return $this->redirect($request->getUri());
         }

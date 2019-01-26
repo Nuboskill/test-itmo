@@ -6,7 +6,7 @@ use App\Entity\{Book, Author};
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\{TextType, IntegerType, SubmitType};
+use Symfony\Component\Form\Extension\Core\Type\{TextType, IntegerType, SubmitType, FileType};
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class BookType extends AbstractType
@@ -16,6 +16,10 @@ class BookType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Название', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+            ])
+            ->add('cover', FileType::class, [
+                'label' => 'Обложка', 'required' => false,
+                'attr' => ['accept' => 'image/*']
             ])
             ->add('year', IntegerType::class, [
                 'label' => 'Год', 'attr' => ['max' => date('Y')]

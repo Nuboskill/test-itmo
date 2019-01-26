@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 * {
     padding: 0;
     margin: 0;
@@ -77,4 +79,29 @@ label.required:before {
 
 .jumbotron {
     background-color: #fff;
+}
+
+.custom-file-label:after {
+    content: "Обзор"
+}
+.card-book-inside .card {
+    flex-direction: row;
+}
+
+.card-book-inside .card .card-img-wrap {
+    max-width: 350px;
+}
+
+@media screen and (max-width: 960px) {
+    .card-book-inside .card {
+        flex-direction: column;
+    }
+
+    .card-book-inside .card .card-img-wrap {
+        max-width: 100%;
+    }
+}
+
+.disabled {
+    cursor: not-allowed;
 }

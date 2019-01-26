@@ -10,24 +10,26 @@ $(document).ready(function () {
         if (!button.hasClass('disabled')) {
             button.addClass('disabled');
 
-            let def = $.Deferred();
-
             $.ajax({
                 url: link,
                 type: 'DELETE',
                 success: function(result) {
                     window.location.replace(result);
-                    def.resolve();
                 },
                 error: function(e) {
                     console.log(e);
-                    def.reject();
+                    button.removeClass('disabled');
                 }
-            });
-
-            def.then(function () {
-                button.removeClass('disabled');
             });
         }
     });
+
+    // Fix for bootstrap input[type='file']
+    $("input[type='file']").on('change', function(){
+        let file = $(this).val().split('\\'),
+            fileName = file[file.length - 1];
+
+        $(this).next('.custom-file-label').html(fileName);
+    });
+
 });

@@ -40,7 +40,7 @@ class BooksController extends AbstractController
     {
         $book = new Book();
 
-        $form = $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,13 +62,15 @@ class BooksController extends AbstractController
      */
     public function update(Request $request, Book $book)
     {
-        $form = $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
             $entityManager->flush();
+
+            $this->addFlash('notice',"Книга успешно изменена.");
 
             return $this->redirect($request->getUri());
         }

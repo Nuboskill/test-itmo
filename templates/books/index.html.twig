@@ -10,7 +10,11 @@
             {% for book in books %}
                 <div class="card-wrap col-12 col-md-6 col-xl-4">
                     <div class="card">
-                        {#<img class="card-img-top" src="..." alt="Card image cap">#}
+                        {% if book.cover %}
+                            <a href="{{ path('books_show', {'id': book.id}) }}">
+                                <img class="card-img-top" src="{{ asset(covers_directory ~ book.cover.filename) }}" alt="{{ book.name }}">
+                            </a>
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ book.name }}</h5>
                             <ul>
