@@ -92,6 +92,14 @@ class Author
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        $first_initial = $this->first_name ? " ".mb_substr($this->first_name, 0, 1)."." : '';
+        $middle_initial = $this->middle_name ? " ".mb_substr($this->middle_name, 0, 1)."." : '';
+
+        return $this->last_name.$first_initial.$middle_initial;
+    }
+
     /**
      * @return Collection|Book[]
      */

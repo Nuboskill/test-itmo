@@ -16,11 +16,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  * @UniqueEntity(
  *     fields={"name", "year"},
- *     message="Повторное добавление в каталог существующей книги запрещено."
+ *     message="Уже существует книга с таким названием и годом издания."
  * )
  * @UniqueEntity(
  *     fields={"name", "isbn"},
- *     message="Повторное добавление в каталог существующей книги запрещено."
+ *     message="Уже существует книга с таким названием и ISBN."
  * )
  */
 class Book
@@ -43,7 +43,7 @@ class Book
     private $year;
 
     /**
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string", length=190, unique=true)
      */
     private $isbn;
 
