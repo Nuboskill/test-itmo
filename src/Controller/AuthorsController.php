@@ -6,6 +6,7 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Form\AuthorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -79,7 +80,7 @@ class AuthorsController extends AbstractController
     }
 
     /**
-     * @Route("/authors/delete/{id<\d+>}", name="authors_delete")
+     * @Route("/authors/delete/{id<\d+>}", name="authors_delete", methods={"DELETE"})
      */
     public function delete(Author $author)
     {
@@ -88,7 +89,7 @@ class AuthorsController extends AbstractController
         $entityManager->remove($author);
         $entityManager->flush();
 
-        return $this->redirectToRoute('authors');
+        return new Response($this->generateUrl('authors'));
     }
 
 }

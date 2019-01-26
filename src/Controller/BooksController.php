@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -79,7 +80,7 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/books/delete/{id<\d+>}", name="books_delete")
+     * @Route("/books/delete/{id<\d+>}", name="books_delete", methods={"DELETE"})
      */
     public function delete(Book $book)
     {
@@ -88,7 +89,7 @@ class BooksController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        return $this->redirectToRoute('books');
+        return new Response($this->generateUrl('books'));
     }
 
 }
