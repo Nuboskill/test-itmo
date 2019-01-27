@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 
 class BooksController extends AbstractController
@@ -20,13 +21,14 @@ class BooksController extends AbstractController
         // Книги с авторами
         $books = $this->getDoctrine()
             ->getRepository(Book::class)
-            ->findManyJoinedToAuthors();
+            ->findOneToManyJoinedToAuthors();
 
         return $this->render('books/index.html.twig', compact('books'));
     }
 
     /**
      * @Route("/books/{id<\d+>}", name="books_show", methods={"GET"})
+     * @Entity("book", expr="repository.findOneToManyJoinedToAuthorsBy(id)")
      */
     public function show(Book $book)
     {
@@ -59,6 +61,7 @@ class BooksController extends AbstractController
 
     /**
      * @Route("/books/edit/{id<\d+>}", name="books_edit", methods={"POST", "GET"})
+     * @Entity("book", expr="repository.findOneToManyJoinedToAuthorsBy(id)")
      */
     public function update(Request $request, Book $book)
     {

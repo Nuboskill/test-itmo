@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Author;
-use App\Entity\Book;
 use App\Form\AuthorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class AuthorsController extends AbstractController
 {
@@ -20,13 +20,14 @@ class AuthorsController extends AbstractController
         // Авторы с книгами
         $authors = $this->getDoctrine()
             ->getRepository(Author::class)
-            ->findManyJoinedToBooks();
+            ->findOneToManyJoinedToBooks();
 
         return $this->render('authors/index.html.twig', compact('authors'));
     }
 
     /**
      * @Route("/authors/{id<\d+>}", name="authors_show", methods={"GET"})
+     * @Entity("author", expr="repository.findOneToManyJoinedToBooksBy(id)")
      */
     public function show(Author $author)
     {

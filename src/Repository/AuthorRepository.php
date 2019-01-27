@@ -23,12 +23,23 @@ class AuthorRepository extends ServiceEntityRepository
      * @return Author[] Returns an array of Author with Book objects
      */
 
-    public function findManyJoinedToBooks()
+    public function findOneToManyJoinedToBooks()
     {
-        return $this->createQueryBuilder('b')
-            ->leftJoin('b.books', 'a')
-            ->addSelect('a')
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.books', 'b')
+            ->addSelect('b')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOneToManyJoinedToBooksBy($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('a.books', 'b')
+            ->addSelect('b')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
