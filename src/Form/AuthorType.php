@@ -14,22 +14,26 @@ class AuthorType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-                'label' => 'Фамилия', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+                'label' => 'last_name.label',
+                'attr' => ['maxlength' => 190, 'autocomplete' => 'off', 'placeholder' => 'last_name.placeholder'],
             ])
             ->add('firstName', TextType::class, [
-                'label' => 'Имя', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+                'label' => 'first_name.label',
+                'attr' => ['maxlength' => 190, 'autocomplete' => 'off', 'placeholder' => 'first_name.placeholder'],
             ])
             ->add('middleName', TextType::class, [
-                'label' => 'Отчество', 'required' => false,
-                'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+                'label' => 'middle_name.label',
+                'required' => false,
+                'attr' => ['maxlength' => 190, 'autocomplete' => 'off', 'placeholder' => 'middle_name.placeholder'],
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Отправить'])
+            ->add('submit', SubmitType::class, ['label' => 'submit'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'translation_domain' => 'authors',
             'data_class' => Author::class,
         ]);
     }

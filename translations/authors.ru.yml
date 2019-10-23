@@ -1,0 +1,10 @@
+last_name:
+    label: Фамилия
+    placeholder: Введите вашу фамилию
+first_name:
+    label: Имя
+    placeholder: Введите ваше имя
+middle_name:
+    label: Отчество
+    placeholder: Введите ваше отчество
+submit: Отправить

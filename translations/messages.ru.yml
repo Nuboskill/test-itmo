@@ -1,0 +1,14 @@
+menu:
+    home: Главная
+    books: Книги
+    authors: Авторы
+
+pages:
+    home:
+        page_title: Главная
+        books_catalog: Каталог книг
+        book_add: Добавить книгу
+        author_add: Добавить автора
+    books:
+        title_add: Добавление книги
+        title_edit: Редактирование книги

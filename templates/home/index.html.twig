@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}{{ 'pages.home.page_title' | trans }}{% endblock %}
 
 {% block body %}
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Каталог книг</h1>
+            <h1 class="jumbotron-heading">{{ 'pages.home.books_catalog' | trans }}</h1>
             <p class="lead text-muted">
                 Каталог позволяет просматривать, добавлять, редактировать и удалять книги с авторами.
             </p>
@@ -18,8 +18,8 @@
                 Или создайте их самостоятельно.
             </p>
             <p>
-                <a href="{{ path('books_new') }}" class="btn btn-primary">Добавить книгу</a>
-                <a href="{{ path('authors_new') }}" class="btn btn-secondary">Добавить автора</a>
+                <a href="{{ path('books_new') }}" class="btn btn-primary">{{ 'pages.home.book_add' | trans }}</a>
+                <a href="{{ path('authors_new') }}" class="btn btn-secondary">{{ 'pages.home.author_add' | trans }}</a>
             </p>
         </div>
     </section>

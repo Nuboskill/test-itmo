@@ -15,33 +15,42 @@ class BookType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Название', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+                'label' => 'name.label',
+                'attr' => ['maxlength' => 190, 'autocomplete' => 'off', 'placeholder' => 'name.placeholder'],
             ])
             ->add('cover', FileType::class, [
-                'label' => 'Обложка', 'required' => false,
-                'attr' => ['accept' => 'image/*']
+                'label' => 'cover.label',
+                'required' => false,
+                'attr' => ['accept' => 'image/*', 'placeholder' => 'cover.placeholder'],
             ])
             ->add('year', IntegerType::class, [
-                'label' => 'Год', 'attr' => ['max' => date('Y')]
+                'label' => 'year.label',
+                'attr' => ['max' => date('Y'), 'placeholder' => 'year.placeholder'],
             ])
             ->add('isbn', TextType::class, [
-                'label' => 'ISBN', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
+                'label' => 'isbn.label',
+                'attr' => ['maxlength' => 190, 'autocomplete' => 'off', 'placeholder' => 'isbn.placeholder'],
             ])
             ->add('pagesCount', IntegerType::class, [
-                'label' => 'Количество страниц', 'required' => false
+                'label' => 'pages_count.label',
+                'required' => false,
+                'attr' => ['placeholder' => 'pages_count.placeholder'],
             ])
             ->add('authors', EntityType::class, [
-                'label' => 'Авторы', 'class' => Author::class,
-                'choice_label' => 'name', 'multiple' => true,
-                'required' => false
+                'label' => 'authors.label',
+                'class' => Author::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'required' => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Отправить'])
+            ->add('submit', SubmitType::class, ['label' => 'submit'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'translation_domain' => 'books',
             'data_class' => Book::class,
         ]);
     }

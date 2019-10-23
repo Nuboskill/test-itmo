@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Редактирование книги{% endblock %}
+{% block title %}{{ 'pages.books.title_edit' | trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <div class="page-header">Редактирование книги</div>
+        <div class="page-header">{{ 'pages.books.title_edit' | trans }}</div>
 
         {% for message in app.flashes('notice') %}
             <div class="alert alert-success">

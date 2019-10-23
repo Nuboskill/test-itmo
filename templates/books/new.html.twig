@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Добавление книги{% endblock %}
+{% block title %}{{ 'pages.books.title_add' | trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <div class="page-header">Добавление книги</div>
+        <div class="page-header">{{ 'pages.books.title_add' | trans }}</div>
 
         {{ form(form) }}
     </div>
