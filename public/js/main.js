@@ -1,14 +1,14 @@
 $(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
 
     $('.delete').click(function (e) {
         e.preventDefault();
 
-        let button = $(this),
-            link = button.attr('href');
+        let $button = $(this),
+            link = $button.attr('href');
 
-        if (!button.hasClass('disabled')) {
-            button.addClass('disabled');
+        if (!$button.hasClass('disabled')) {
+            $button.addClass('disabled');
 
             $.ajax({
                 url: link,
@@ -17,8 +17,8 @@ $(document).ready(function () {
                     window.location.replace(result);
                 },
                 error: function(e) {
-                    console.log(e);
-                    button.removeClass('disabled');
+                    console.error(e);
+                    $button.removeClass('disabled');
                 }
             });
         }
@@ -31,5 +31,4 @@ $(document).ready(function () {
 
         $(this).next('.custom-file-label').html(fileName);
     });
-
 });

@@ -84,6 +84,7 @@ label.required:before {
 .custom-file-label:after {
     content: "Обзор"
 }
+
 .card-book-inside .card {
     flex-direction: row;
 }

@@ -63,6 +63,18 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
+        "console": "php bin/console",
+        "server:run": "@console s:r",
+        "fixtures:load": "@console d:f:l --append",
+        "data:migrate": [
+            "@console d:d:c --if-not-exists",
+            "@console d:m:m -n --allow-no-migration -q"
+        ],
+        "data:recreate": [
+            "@console d:d:d --force",
+            "@data:migrate",
+            "@fixtures:load"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],

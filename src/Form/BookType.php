@@ -27,7 +27,7 @@ class BookType extends AbstractType
             ->add('isbn', TextType::class, [
                 'label' => 'ISBN', 'attr' => ['maxlength' => 190, 'autocomplete' => 'off']
             ])
-            ->add('pages_count', IntegerType::class, [
+            ->add('pagesCount', IntegerType::class, [
                 'label' => 'Количество страниц', 'required' => false
             ])
             ->add('authors', EntityType::class, [

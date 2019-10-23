@@ -35,28 +35,44 @@ class Book
 
     /**
      * @ORM\Column(type="string", length=190)
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="smallint", options={"unsigned":true})
+     *
+     * @Assert\NotBlank()
      */
     private $year;
 
     /**
      * @ORM\Column(type="string", length=190, unique=true)
+     *
+     * @Assert\NotBlank()
      */
     private $isbn;
 
     /**
      * @ORM\Column(type="smallint", nullable=true, options={"unsigned":true})
      */
-    private $pages_count;
+    private $pagesCount;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
      */
     private $authors;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\File(
+     *     mimeTypes={ "image/jpeg", "image/png" },
+     *     mimeTypesMessage = "Разрешенные форматы изображений jpeg или png."
+     * )
+     */
+    private $cover;
 
     public function __construct()
     {
@@ -106,12 +122,12 @@ class Book
 
     public function getPagesCount(): ?int
     {
-        return $this->pages_count;
+        return $this->pagesCount;
     }
 
-    public function setPagesCount(?int $pages_count): self
+    public function setPagesCount(?int $pagesCount): self
     {
-        $this->pages_count = $pages_count;
+        $this->pagesCount = $pagesCount;
 
         return $this;
     }
@@ -141,16 +157,6 @@ class Book
 
         return $this;
     }
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Assert\File(
-     *     mimeTypes={ "image/jpeg", "image/png" },
-     *     mimeTypesMessage = "Разрешенные форматы изображений jpeg или png."
-     * )
-     */
-    private $cover;
 
     public function getCover()
     {

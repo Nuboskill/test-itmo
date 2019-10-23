@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="authors", uniqueConstraints={
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  * @UniqueEntity(
- *     fields={"last_name", "first_name", "middle_name"},
+ *     fields={"lastName", "firstName", "middleName"},
  *     message="Повторное добавление в каталог существующего автора запрещено."
  * )
  */
@@ -28,18 +29,22 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=190)
+     *
+     * @Assert\NotBlank()
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=190)
+     *
+     * @Assert\NotBlank()
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=190, nullable=true)
      */
-    private $middle_name;
+    private $middleName;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="authors")
@@ -58,46 +63,46 @@ class Author
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getMiddleName(): ?string
     {
-        return $this->middle_name;
+        return $this->middleName;
     }
 
-    public function setMiddleName(?string $middle_name): self
+    public function setMiddleName(?string $middleName): self
     {
-        $this->middle_name = $middle_name;
+        $this->middleName = $middleName;
 
         return $this;
     }
 
     public function getName(): ?string
     {
-        $first_initial = $this->first_name ? " ".mb_substr($this->first_name, 0, 1)."." : '';
-        $middle_initial = $this->middle_name ? " ".mb_substr($this->middle_name, 0, 1)."." : '';
+        $firstInitial = $this->firstName ? " ".mb_substr($this->firstName, 0, 1)."." : '';
+        $middleInitial = $this->middleName ? " ".mb_substr($this->middleName, 0, 1)."." : '';
 
-        return $this->last_name.$first_initial.$middle_initial;
+        return $this->lastName.$firstInitial.$middleInitial;
     }
 
     /**

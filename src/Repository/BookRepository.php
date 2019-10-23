@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -25,21 +26,32 @@ class BookRepository extends ServiceEntityRepository
 
     public function findOneToManyJoinedToAuthors()
     {
-        return $this->createQueryBuilder('b')
+        return $this
+            ->createQueryBuilder('b')
             ->leftJoin('b.authors', 'a')
             ->addSelect('a')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
-    public function findOneToManyJoinedToAuthorsBy($id)
+    /**
+     * @param $id
+     *
+     * @return mixed
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findOneToManyJoinedToAuthorsBy(int $id)
     {
-        return $this->createQueryBuilder('b')
+        return $this
+            ->createQueryBuilder('b')
             ->where('b.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('b.authors', 'a')
             ->addSelect('a')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 }

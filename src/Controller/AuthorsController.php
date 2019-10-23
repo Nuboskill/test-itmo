@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Form\AuthorType;
+use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,32 +13,45 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class AuthorsController extends AbstractController
 {
+    /** @var AuthorRepository */
+    private $authorRepository;
+
+    public function __construct(AuthorRepository $authorRepository)
+    {
+        $this->authorRepository = $authorRepository;
+    }
+
     /**
      * @Route("/authors", name="authors", methods={"GET"})
      */
-    public function index()
+    public function index(): Response
     {
-        // Авторы с книгами
-        $authors = $this->getDoctrine()
-            ->getRepository(Author::class)
-            ->findOneToManyJoinedToBooks();
+        $authors = $this->authorRepository->findOneToManyJoinedToBooks();
 
         return $this->render('authors/index.html.twig', compact('authors'));
     }
 
     /**
+     * @param Author $author
+     *
+     * @return Response
+     *
      * @Route("/authors/{id<\d+>}", name="authors_show", methods={"GET"})
      * @Entity("author", expr="repository.findOneToManyJoinedToBooksBy(id)")
      */
-    public function show(Author $author)
+    public function show(Author $author): Response
     {
         return $this->render('authors/show.html.twig', compact('author'));
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
+     *
      * @Route("/authors/new", name="authors_new", methods={"POST", "GET"})
      */
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
         $author = new Author();
 
@@ -59,9 +73,14 @@ class AuthorsController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param Author $author
+     *
+     * @return Response
+     *
      * @Route("/authors/edit/{id<\d+>}", name="authors_edit", methods={"POST", "GET"})
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, Author $author): Response
     {
         $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
@@ -83,9 +102,13 @@ class AuthorsController extends AbstractController
     }
 
     /**
+     * @param Author $author
+     *
+     * @return Response
+     *
      * @Route("/authors/delete/{id<\d+>}", name="authors_delete", methods={"DELETE"})
      */
-    public function delete(Author $author)
+    public function delete(Author $author): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -94,5 +117,4 @@ class AuthorsController extends AbstractController
 
         return new Response($this->generateUrl('authors'));
     }
-
 }

@@ -18,21 +18,21 @@ class CoverUploadListener
         $this->uploader = $uploader;
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
     }
 
-    public function preUpdate(PreUpdateEventArgs $args)
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
         $entity = $args->getEntity();
 
         $this->uploadFile($entity);
     }
 
-    public function postLoad(LifecycleEventArgs $args)
+    public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -45,7 +45,7 @@ class CoverUploadListener
         }
     }
 
-    public function preRemove (LifecycleEventArgs $args)
+    public function preRemove (LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -58,22 +58,18 @@ class CoverUploadListener
         }
     }
 
-    private function uploadFile($entity)
+    private function uploadFile($entity): void
     {
-        // upload only works for Book entities
         if (!$entity instanceof Book) {
             return;
         }
 
         $file = $entity->getCover();
 
-        // only upload new files
         if ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file);
             $entity->setCover($fileName);
         } elseif ($file instanceof File) {
-            // prevents the full file path being saved on updates
-            // as the path is set on the postLoad listener
             $entity->setCover($file->getFilename());
         }
     }
