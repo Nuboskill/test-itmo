@@ -8,3 +8,5 @@ middle_name:
     label: Отчество
     placeholder: Введите ваше отчество
 submit: Отправить
+books:
+    label: Книги

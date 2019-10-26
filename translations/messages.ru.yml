@@ -1,3 +1,9 @@
+general:
+    buttons:
+        show_more: Подробнее
+        edit: Редактировать
+        delete: Удалить
+
 menu:
     home: Главная
     books: Книги
@@ -9,6 +15,21 @@ pages:
         books_catalog: Каталог книг
         book_add: Добавить книгу
         author_add: Добавить автора
+        text:
+            create_manually: Или создайте их самостоятельно.
+            catalog_opportunity: Каталог позволяет просматривать, добавлять, редактировать и удалять книги с авторами.
+            fixture_info: Чтобы загрузить заготовленный набор книг и авторов воспользуйтесь
     books:
+        title: Книги
         title_add: Добавление книги
         title_edit: Редактирование книги
+        button_add: Добавить книгу
+        button_show_all: Смотреть все книги
+        empty: Книги отсутствуют, но вы можете их <a href="%link%">добавить</a>.
+    authors:
+        title: Авторы
+        title_add: Добавление автора
+        title_edit: Редактирование автора
+        button_add: Добавить автора
+        button_show_all: Смотреть всех авторов
+        empty: Авторы отсутствуют, но вы можете их <a href="%link%">добавить</a>.

@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Авторы{% endblock %}
+{% block title %}{{ 'pages.authors.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <div class="page-header">Авторы <a href="{{ path('authors_new') }}"><i data-toggle="tooltip" title="Добавить автора" class="fas fa-plus"></i></a></div>
+        <div class="page-header">{{ 'pages.authors.title' | trans }}
+            <a href="{{ path('authors_new') }}">
+                <i data-toggle="tooltip" title="{{ 'pages.authors.button_add' | trans }}" class="fas fa-plus"></i>
+            </a>
+        </div>
 
         <div class="row">
             {% for author in authors %}
@@ -13,7 +17,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ author.name }}</h5>
                             <ul>
-                                <li>Книги:
+                                <li>{{ 'books.label' | trans({}, 'authors') }}:
                                     {% for book in author.books %}
                                         <a href="{{ path('books_show', {'id': book.id}) }}">{{ book.name }}</a>
                                         {% if not loop.last %}, {% endif %}
@@ -22,14 +26,14 @@
                                     {% endfor %}
                                 </li>
                             </ul>
-                            <a href="{{ path('authors_show', {'id': author.id}) }}" class="btn btn-primary">Подробнее</a>
+                            <a href="{{ path('authors_show', {'id': author.id}) }}" class="btn btn-primary">{{ 'general.buttons.show_more' | trans }}</a>
                         </div>
                     </div>
                 </div>
             {% else %}
                 <div class="alert alert-info">
                     <i class="fas fa-info-circle"></i>
-                    Авторы отсутствуют, но вы можете их <a href="{{ path('authors_new') }}">добавить</a>.
+                    {{ 'pages.authors.empty' | trans({'%link%': path('authors_new')}) | raw }}
                 </div>
             {% endfor %}
         </div>

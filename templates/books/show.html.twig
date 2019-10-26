@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ book.name }} - Книги{% endblock %}
+{% block title %}{{ book.name }} - {{ 'pages.books.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="page-header">
             {{ book.name }}
-            <a href="{{ path('books_edit', {'id': book.id}) }}"><i data-toggle="tooltip" title="Редактировать" class="fas fa-pencil-alt"></i></a>
-            <a class="delete" href="{{ path('books_delete', {'id': book.id}) }}"><i data-toggle="tooltip" title="Удалить" class="fas fa-trash-alt"></i></a>
+
+            {% apply spaceless %}
+                <a href="{{ path('books_edit', {'id': book.id}) }}">
+                    <i data-toggle="tooltip" title="{{ 'general.buttons.edit' | trans }}" class="fas fa-pencil-alt"></i>
+                </a>
+            {% endapply %}
+
+            <a class="delete" href="{{ path('books_delete', {'id': book.id}) }}">
+                <i data-toggle="tooltip" title="{{ 'general.buttons.delete' | trans }}" class="fas fa-trash-alt"></i>
+            </a>
         </div>
 
         <div class="card-wrap card-book-inside">
@@ -19,7 +27,7 @@
                 {% endif %}
                 <div class="card-body">
                     <ul>
-                        <li>Авторы:
+                        <li>{{ 'authors.label' | trans({}, 'books') }}:
                             {% for author in book.authors %}
                                 <a href="{{ path('authors_show', {'id': author.id}) }}">{{ author.name }}</a>
                                 {% if not loop.last %}, {% endif %}
@@ -27,14 +35,16 @@
                                 -
                             {% endfor %}
                         </li>
-                        <li>ISBN: {{ book.isbn }}</li>
-                        {% if book.pagesCount %}<li>Страниц: {{ book.pagesCount }}</li> {% endif %}
-                        <li>Год: {{ book.year }}</li>
+                        <li>{{ 'isbn.label' | trans({}, 'books') }}: {{ book.isbn }}</li>
+                        {% if book.pagesCount %}
+                            <li>{{ 'pages_count.label' | trans({}, 'books') }}: {{ book.pagesCount }}</li>
+                        {% endif %}
+                        <li>{{ 'year.label' | trans({}, 'books') }}: {{ book.year }}</li>
                     </ul>
                 </div>
             </div>
 
-            <a href="{{ path('books') }}" class="btn btn-primary mt-5">Смотреть все книги</a>
+            <a href="{{ path('books') }}" class="btn btn-primary mt-5">{{ 'pages.books.button_show_all' | trans }}</a>
         </div>
     </div>
 {% endblock %}
