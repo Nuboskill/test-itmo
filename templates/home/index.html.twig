@@ -7,15 +7,14 @@
         <div class="container">
             <h1 class="jumbotron-heading">{{ 'pages.home.books_catalog' | trans }}</h1>
             <p class="lead text-muted">
-                {{ 'pages.home.text.catalog_opportunity' | trans }}
+                {{ 'pages.home.text.catalog_opportunity' | trans }}.
             </p>
             <p class="lead text-muted">
-                {{ 'pages.home.text.fixture_info' | trans }}
-                <a target="_blank" href="https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html">DoctrineFixturesBundle</a>.
+                {{ 'pages.home.text.fixture_info' | trans({'%link%': 'https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html'}) | raw }}.
             </p>
             <code>composer run fixtures:load</code>
             <p class="lead text-muted mt-5">
-                {{ 'pages.home.text.create_manually' | trans }}
+                {{ 'pages.home.text.create_manually' | trans }}.
             </p>
             <p>
                 <a href="{{ path('books_new') }}" class="btn btn-primary">{{ 'pages.home.book_add' | trans }}</a>

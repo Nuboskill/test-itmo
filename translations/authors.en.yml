@@ -1,0 +1,12 @@
+last_name:
+    label: Last name
+    placeholder: Enter your last name
+first_name:
+    label: First name
+    placeholder: Enter your fiest name
+middle_name:
+    label: Middle name
+    placeholder: Enter your middle name
+submit: Submit
+books:
+    label: Books

@@ -1,5 +1,5 @@
 parameters:
-    locale: 'ru'
+    locale: 'en'
     fallback_locale: 'en'
     covers_directory: '%kernel.project_dir%/public/uploads/covers'
 

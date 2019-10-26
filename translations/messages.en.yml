@@ -1,0 +1,35 @@
+general:
+    buttons:
+        show_more: Show more
+        edit: Edit
+        delete: Delete
+
+menu:
+    home: Home
+    books: Books
+    authors: Authors
+
+pages:
+    home:
+        page_title: Home
+        books_catalog: Books catalog
+        book_add: Add book
+        author_add: Add author
+        text:
+            create_manually: Or create it manually
+            catalog_opportunity: The catalog allows you to view, add, edit and delete books with authors
+            fixture_info: Use the <a target="_blank" href="%link%">DoctrineFixturesBundle</a> to download a prepared set of books and authors
+    books:
+        title: Books
+        title_add: Book adding
+        title_edit: Book editing
+        button_add: Add book
+        button_show_all: View all books
+        empty: There is no books, but you can <a href="%link%">add</a> them
+    authors:
+        title: Authors
+        title_add: Author adding
+        title_edit: Author editing
+        button_add: Add author
+        button_show_all: View all authors
+        empty: There is no authors, but you can <a href="%link%">add</a> them
