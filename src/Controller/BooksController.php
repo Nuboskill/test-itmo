@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
+/**
+ * @Route("/books", name="books_")
+ */
 class BooksController extends AbstractController
 {
     /** @var BookRepository */
@@ -24,7 +27,7 @@ class BooksController extends AbstractController
     /**
      * @return Response
      *
-     * @Route("/books", name="books", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -38,7 +41,7 @@ class BooksController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/books/{id<\d+>}", name="books_show", methods={"GET"})
+     * @Route("/{id<\d+>}", name="show", methods={"GET"})
      * @Entity("book", expr="repository.findOneToManyJoinedToAuthorsBy(id)")
      */
     public function show(Book $book): Response
@@ -51,7 +54,7 @@ class BooksController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/books/new", name="books_new", methods={"POST", "GET"})
+     * @Route("/new", name="new", methods={"POST", "GET"})
      */
     public function new(Request $request): Response
     {
@@ -80,7 +83,7 @@ class BooksController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/books/edit/{id<\d+>}", name="books_edit", methods={"POST", "GET"})
+     * @Route("/edit/{id<\d+>}", name="edit", methods={"POST", "GET"})
      * @Entity("book", expr="repository.findOneToManyJoinedToAuthorsBy(id)")
      */
     public function update(Request $request, Book $book): Response
@@ -109,7 +112,7 @@ class BooksController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/books/delete/{id<\d+>}", name="books_delete", methods={"DELETE"})
+     * @Route("/delete/{id<\d+>}", name="delete", methods={"DELETE"})
      */
     public function delete(Book $book): Response
     {
@@ -118,6 +121,6 @@ class BooksController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        return new Response($this->generateUrl('books'));
+        return new Response($this->generateUrl('books_index'));
     }
 }
