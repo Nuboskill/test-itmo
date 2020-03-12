@@ -1,4 +1,7 @@
-# itmo.loc
+# test-itmo
+
+Test task for ITMO University
+
 ## Installation
 
 ``` bash
